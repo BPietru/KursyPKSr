@@ -1,0 +1,263 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="PKSTModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="AUTOKARY">
+    <Key>
+      <PropertyRef Name="A_ID" />
+    </Key>
+    <Property Name="A_ID" Type="Int32" Nullable="false" />
+    <Property Name="K_ID" Type="Int32" Nullable="false" />
+    <Property Name="NR_REJ" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="MARKA" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="MODEL" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="LICZBA_MIEJSC" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+    <NavigationProperty Name="KIEROWCY" Relationship="Self.FK_AUTOKARY_KIEROWCY__KIEROWCY" FromRole="AUTOKARY" ToRole="KIEROWCY" />
+    <NavigationProperty Name="KURSies" Relationship="Self.FK_KURSY_AUTOKARY__AUTOKARY" FromRole="AUTOKARY" ToRole="KURSY" />
+  </EntityType>
+  <EntityType Name="KIEROWCY">
+    <Key>
+      <PropertyRef Name="K_ID" />
+    </Key>
+    <Property Name="K_ID" Type="Int32" Nullable="false" />
+    <Property Name="IMIE" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="NAZWISKO" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="PESEL" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="AUTOKARies" Relationship="Self.FK_AUTOKARY_KIEROWCY__KIEROWCY" FromRole="KIEROWCY" ToRole="AUTOKARY" />
+  </EntityType>
+  <EntityType Name="KIERUNEK">
+    <Key>
+      <PropertyRef Name="ID_KIERUNKU" />
+    </Key>
+    <Property Name="ID_KIERUNKU" Type="Int32" Nullable="false" />
+    <Property Name="NAZWA_KIERUNKU" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="KURSies" Relationship="Self.FK_KURSY_KIERUNEK__KIERUNEK" FromRole="KIERUNEK" ToRole="KURSY" />
+  </EntityType>
+  <EntityType Name="KURSY">
+    <Key>
+      <PropertyRef Name="KU_ID" />
+    </Key>
+    <Property Name="KU_ID" Type="Int32" Nullable="false" />
+    <Property Name="POCZATEK_ID" Type="Int32" Nullable="false" />
+    <Property Name="A_ID" Type="Int32" Nullable="false" />
+    <Property Name="KONIEC_ID" Type="Int32" Nullable="false" />
+    <Property Name="ID_KIERUNKU" Type="Int32" Nullable="false" />
+    <Property Name="DATA" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="CZAS_WYJAZDU" Type="Time" Nullable="false" Precision="7" />
+    <Property Name="PASAZEROWIE" Type="Int32" Nullable="false" />
+    <Property Name="SYGNATURA_KURSU" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="AUTOKARY" Relationship="Self.FK_KURSY_AUTOKARY__AUTOKARY" FromRole="KURSY" ToRole="AUTOKARY" />
+    <NavigationProperty Name="KIERUNEK" Relationship="Self.FK_KURSY_KIERUNEK__KIERUNEK" FromRole="KURSY" ToRole="KIERUNEK" />
+    <NavigationProperty Name="MIEJSCOWOSC" Relationship="Self.FK_KURSY_KONIEC_PR_MIEJSCOW" FromRole="KURSY" ToRole="MIEJSCOWOSC" />
+    <NavigationProperty Name="MIEJSCOWOSC1" Relationship="Self.FK_KURSY_PRZYSTANE_MIEJSCOW" FromRole="KURSY" ToRole="MIEJSCOWOSC" />
+    <NavigationProperty Name="TRASAs" Relationship="Self.FK_TRASA_TRASA2_KURSY" FromRole="KURSY" ToRole="TRASA" />
+  </EntityType>
+  <EntityType Name="MIEJSCOWOSC">
+    <Key>
+      <PropertyRef Name="M_ID" />
+    </Key>
+    <Property Name="M_ID" Type="Int32" Nullable="false" />
+    <Property Name="NAZWA" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="KOD_POCZTOWY" Type="String" MaxLength="7" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="KURSies" Relationship="Self.FK_KURSY_KONIEC_PR_MIEJSCOW" FromRole="MIEJSCOWOSC" ToRole="KURSY" />
+    <NavigationProperty Name="KURSies1" Relationship="Self.FK_KURSY_PRZYSTANE_MIEJSCOW" FromRole="MIEJSCOWOSC" ToRole="KURSY" />
+    <NavigationProperty Name="TRASAs" Relationship="Self.FK_TRASA_TRASA_MIEJSCOW" FromRole="MIEJSCOWOSC" ToRole="TRASA" />
+  </EntityType>
+  <EntityType Name="TRASA">
+    <Key>
+      <PropertyRef Name="M_ID" />
+      <PropertyRef Name="KU_ID" />
+    </Key>
+    <Property Name="M_ID" Type="Int32" Nullable="false" />
+    <Property Name="KU_ID" Type="Int32" Nullable="false" />
+    <Property Name="NUMER_PRZYSTANKU" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+    <Property Name="CZAS_PRZEJAZDU" Type="Time" Nullable="false" Precision="7" />
+    <Property Name="CENA_BILETU" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+    <NavigationProperty Name="KURSY" Relationship="Self.FK_TRASA_TRASA2_KURSY" FromRole="TRASA" ToRole="KURSY" />
+    <NavigationProperty Name="MIEJSCOWOSC" Relationship="Self.FK_TRASA_TRASA_MIEJSCOW" FromRole="TRASA" ToRole="MIEJSCOWOSC" />
+  </EntityType>
+  <EntityType Name="AUTOKARY_KIEROWCY">
+    <Key>
+      <PropertyRef Name="K_ID" />
+      <PropertyRef Name="A_ID" />
+      <PropertyRef Name="MARKA" />
+      <PropertyRef Name="NR_REJ" />
+      <PropertyRef Name="MODEL" />
+      <PropertyRef Name="IMIE" />
+      <PropertyRef Name="NAZWISKO" />
+      <PropertyRef Name="PESEL" />
+    </Key>
+    <Property Name="K_ID" Type="Int32" Nullable="false" />
+    <Property Name="A_ID" Type="Int32" Nullable="false" />
+    <Property Name="MARKA" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="NR_REJ" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="MODEL" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="IMIE" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="NAZWISKO" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="PESEL" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_AUTOKARY_KIEROWCY__KIEROWCY">
+    <End Role="KIEROWCY" Type="Self.KIEROWCY" Multiplicity="1" />
+    <End Role="AUTOKARY" Type="Self.AUTOKARY" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="KIEROWCY">
+        <PropertyRef Name="K_ID" />
+      </Principal>
+      <Dependent Role="AUTOKARY">
+        <PropertyRef Name="K_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_KURSY_AUTOKARY__AUTOKARY">
+    <End Role="AUTOKARY" Type="Self.AUTOKARY" Multiplicity="1" />
+    <End Role="KURSY" Type="Self.KURSY" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AUTOKARY">
+        <PropertyRef Name="A_ID" />
+      </Principal>
+      <Dependent Role="KURSY">
+        <PropertyRef Name="A_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_KURSY_KIERUNEK__KIERUNEK">
+    <End Role="KIERUNEK" Type="Self.KIERUNEK" Multiplicity="1" />
+    <End Role="KURSY" Type="Self.KURSY" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="KIERUNEK">
+        <PropertyRef Name="ID_KIERUNKU" />
+      </Principal>
+      <Dependent Role="KURSY">
+        <PropertyRef Name="ID_KIERUNKU" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_KURSY_KONIEC_PR_MIEJSCOW">
+    <End Role="MIEJSCOWOSC" Type="Self.MIEJSCOWOSC" Multiplicity="1" />
+    <End Role="KURSY" Type="Self.KURSY" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MIEJSCOWOSC">
+        <PropertyRef Name="M_ID" />
+      </Principal>
+      <Dependent Role="KURSY">
+        <PropertyRef Name="POCZATEK_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_KURSY_PRZYSTANE_MIEJSCOW">
+    <End Role="MIEJSCOWOSC" Type="Self.MIEJSCOWOSC" Multiplicity="1" />
+    <End Role="KURSY" Type="Self.KURSY" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MIEJSCOWOSC">
+        <PropertyRef Name="M_ID" />
+      </Principal>
+      <Dependent Role="KURSY">
+        <PropertyRef Name="KONIEC_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TRASA_TRASA2_KURSY">
+    <End Role="KURSY" Type="Self.KURSY" Multiplicity="1" />
+    <End Role="TRASA" Type="Self.TRASA" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="KURSY">
+        <PropertyRef Name="KU_ID" />
+      </Principal>
+      <Dependent Role="TRASA">
+        <PropertyRef Name="KU_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TRASA_TRASA_MIEJSCOW">
+    <End Role="MIEJSCOWOSC" Type="Self.MIEJSCOWOSC" Multiplicity="1" />
+    <End Role="TRASA" Type="Self.TRASA" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MIEJSCOWOSC">
+        <PropertyRef Name="M_ID" />
+      </Principal>
+      <Dependent Role="TRASA">
+        <PropertyRef Name="M_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="PKSTEntities1" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="AUTOKARies" EntityType="Self.AUTOKARY" />
+    <EntitySet Name="KIEROWCies" EntityType="Self.KIEROWCY" />
+    <EntitySet Name="KIERUNEKs" EntityType="Self.KIERUNEK" />
+    <EntitySet Name="KURSies" EntityType="Self.KURSY" />
+    <EntitySet Name="MIEJSCOWOSCs" EntityType="Self.MIEJSCOWOSC" />
+    <EntitySet Name="TRASAs" EntityType="Self.TRASA" />
+    <EntitySet Name="AUTOKARY_KIEROWCY" EntityType="Self.AUTOKARY_KIEROWCY" />
+    <AssociationSet Name="FK_AUTOKARY_KIEROWCY__KIEROWCY" Association="Self.FK_AUTOKARY_KIEROWCY__KIEROWCY">
+      <End Role="KIEROWCY" EntitySet="KIEROWCies" />
+      <End Role="AUTOKARY" EntitySet="AUTOKARies" />
+    </AssociationSet>
+    <AssociationSet Name="FK_KURSY_AUTOKARY__AUTOKARY" Association="Self.FK_KURSY_AUTOKARY__AUTOKARY">
+      <End Role="AUTOKARY" EntitySet="AUTOKARies" />
+      <End Role="KURSY" EntitySet="KURSies" />
+    </AssociationSet>
+    <AssociationSet Name="FK_KURSY_KIERUNEK__KIERUNEK" Association="Self.FK_KURSY_KIERUNEK__KIERUNEK">
+      <End Role="KIERUNEK" EntitySet="KIERUNEKs" />
+      <End Role="KURSY" EntitySet="KURSies" />
+    </AssociationSet>
+    <AssociationSet Name="FK_KURSY_KONIEC_PR_MIEJSCOW" Association="Self.FK_KURSY_KONIEC_PR_MIEJSCOW">
+      <End Role="MIEJSCOWOSC" EntitySet="MIEJSCOWOSCs" />
+      <End Role="KURSY" EntitySet="KURSies" />
+    </AssociationSet>
+    <AssociationSet Name="FK_KURSY_PRZYSTANE_MIEJSCOW" Association="Self.FK_KURSY_PRZYSTANE_MIEJSCOW">
+      <End Role="MIEJSCOWOSC" EntitySet="MIEJSCOWOSCs" />
+      <End Role="KURSY" EntitySet="KURSies" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TRASA_TRASA2_KURSY" Association="Self.FK_TRASA_TRASA2_KURSY">
+      <End Role="KURSY" EntitySet="KURSies" />
+      <End Role="TRASA" EntitySet="TRASAs" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TRASA_TRASA_MIEJSCOW" Association="Self.FK_TRASA_TRASA_MIEJSCOW">
+      <End Role="MIEJSCOWOSC" EntitySet="MIEJSCOWOSCs" />
+      <End Role="TRASA" EntitySet="TRASAs" />
+    </AssociationSet>
+    <FunctionImport Name="HARMONOGRAM" ReturnType="Collection(PKSTModel.HARMONOGRAM_Result)">
+      <Parameter Name="ID_KURSU" Mode="In" Type="Decimal" />
+    </FunctionImport>
+    <FunctionImport Name="KIEROWCY_W_TRASIE" ReturnType="Collection(PKSTModel.KIEROWCY_W_TRASIE_Result)">
+      <Parameter Name="DATA" Mode="In" Type="DateTime" />
+    </FunctionImport>
+    <FunctionImport Name="POJAZDY" ReturnType="Collection(PKSTModel.POJAZDY_Result)" />
+    <FunctionImport Name="PRZEBIEG_TRASY" ReturnType="Collection(PKSTModel.PRZEBIEG_TRASY_Result)">
+      <Parameter Name="ID_KURSU" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="RAPORT_P" ReturnType="Collection(Int32)">
+      <Parameter Name="NR_KURSU" Mode="In" Type="Decimal" />
+    </FunctionImport>
+    <FunctionImport Name="TYGODNIOWY_RAPORT_P" ReturnType="Collection(Int32)">
+      <Parameter Name="DATA1" Mode="In" Type="DateTime" />
+      <Parameter Name="ID_KIERUNKU" Mode="In" Type="Int32" />
+    </FunctionImport>
+  </EntityContainer>
+  <ComplexType Name="HARMONOGRAM_Result">
+    <Property Type="Int32" Name="A_ID" Nullable="false" />
+    <Property Type="String" Name="MARKA" Nullable="false" MaxLength="20" />
+    <Property Type="Int32" Name="KU_ID" Nullable="false" />
+    <Property Type="String" Name="NAZWA" Nullable="false" MaxLength="30" />
+    <Property Type="Time" Name="CZAS_PRZYBYCIA" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="KIEROWCY_W_TRASIE_Result">
+    <Property Type="Int32" Name="K_ID" Nullable="false" />
+    <Property Type="String" Name="IMIE" Nullable="false" MaxLength="20" />
+    <Property Type="String" Name="NAZWISKO" Nullable="false" MaxLength="20" />
+    <Property Type="Int32" Name="KU_ID" Nullable="false" />
+    <Property Type="Int32" Name="A_ID" Nullable="false" />
+    <Property Type="String" Name="NR_REJ" Nullable="false" MaxLength="20" />
+    <Property Type="String" Name="SYGNATURA_KURSU" Nullable="true" MaxLength="10" />
+  </ComplexType>
+  <ComplexType Name="POJAZDY_Result">
+    <Property Type="Int32" Name="K_ID" Nullable="false" />
+    <Property Type="String" Name="IMIE" Nullable="false" MaxLength="20" />
+    <Property Type="String" Name="NAZWISKO" Nullable="false" MaxLength="20" />
+    <Property Type="Int32" Name="A_ID" Nullable="false" />
+    <Property Type="String" Name="NR_REJ" Nullable="false" MaxLength="20" />
+    <Property Type="String" Name="MARKA" Nullable="false" MaxLength="20" />
+  </ComplexType>
+  <ComplexType Name="PRZEBIEG_TRASY_Result">
+    <Property Type="String" Name="NAZWA" Nullable="false" MaxLength="30" />
+    <Property Type="Decimal" Name="NUMER_PRZYSTANKU" Nullable="false" Precision="18" Scale="0" />
+  </ComplexType>
+</Schema>

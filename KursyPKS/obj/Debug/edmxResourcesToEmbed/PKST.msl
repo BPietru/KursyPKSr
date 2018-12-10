@@ -1,0 +1,130 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="PKSTModelStoreContainer" CdmEntityContainer="PKSTEntities1">
+    <EntitySetMapping Name="AUTOKARies">
+      <EntityTypeMapping TypeName="PKSTModel.AUTOKARY">
+        <MappingFragment StoreEntitySet="AUTOKARY">
+          <ScalarProperty Name="A_ID" ColumnName="A_ID" />
+          <ScalarProperty Name="K_ID" ColumnName="K_ID" />
+          <ScalarProperty Name="NR_REJ" ColumnName="NR_REJ" />
+          <ScalarProperty Name="MARKA" ColumnName="MARKA" />
+          <ScalarProperty Name="MODEL" ColumnName="MODEL" />
+          <ScalarProperty Name="LICZBA_MIEJSC" ColumnName="LICZBA_MIEJSC" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="KIEROWCies">
+      <EntityTypeMapping TypeName="PKSTModel.KIEROWCY">
+        <MappingFragment StoreEntitySet="KIEROWCY">
+          <ScalarProperty Name="K_ID" ColumnName="K_ID" />
+          <ScalarProperty Name="IMIE" ColumnName="IMIE" />
+          <ScalarProperty Name="NAZWISKO" ColumnName="NAZWISKO" />
+          <ScalarProperty Name="PESEL" ColumnName="PESEL" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="KIERUNEKs">
+      <EntityTypeMapping TypeName="PKSTModel.KIERUNEK">
+        <MappingFragment StoreEntitySet="KIERUNEK">
+          <ScalarProperty Name="ID_KIERUNKU" ColumnName="ID_KIERUNKU" />
+          <ScalarProperty Name="NAZWA_KIERUNKU" ColumnName="NAZWA_KIERUNKU" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="KURSies">
+      <EntityTypeMapping TypeName="PKSTModel.KURSY">
+        <MappingFragment StoreEntitySet="KURSY">
+          <ScalarProperty Name="KU_ID" ColumnName="KU_ID" />
+          <ScalarProperty Name="POCZATEK_ID" ColumnName="POCZATEK_ID" />
+          <ScalarProperty Name="A_ID" ColumnName="A_ID" />
+          <ScalarProperty Name="KONIEC_ID" ColumnName="KONIEC_ID" />
+          <ScalarProperty Name="ID_KIERUNKU" ColumnName="ID_KIERUNKU" />
+          <ScalarProperty Name="DATA" ColumnName="DATA" />
+          <ScalarProperty Name="CZAS_WYJAZDU" ColumnName="CZAS_WYJAZDU" />
+          <ScalarProperty Name="PASAZEROWIE" ColumnName="PASAZEROWIE" />
+          <ScalarProperty Name="SYGNATURA_KURSU" ColumnName="SYGNATURA_KURSU" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MIEJSCOWOSCs">
+      <EntityTypeMapping TypeName="PKSTModel.MIEJSCOWOSC">
+        <MappingFragment StoreEntitySet="MIEJSCOWOSC">
+          <ScalarProperty Name="M_ID" ColumnName="M_ID" />
+          <ScalarProperty Name="NAZWA" ColumnName="NAZWA" />
+          <ScalarProperty Name="KOD_POCZTOWY" ColumnName="KOD_POCZTOWY" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TRASAs">
+      <EntityTypeMapping TypeName="PKSTModel.TRASA">
+        <MappingFragment StoreEntitySet="TRASA">
+          <ScalarProperty Name="M_ID" ColumnName="M_ID" />
+          <ScalarProperty Name="KU_ID" ColumnName="KU_ID" />
+          <ScalarProperty Name="NUMER_PRZYSTANKU" ColumnName="NUMER_PRZYSTANKU" />
+          <ScalarProperty Name="CZAS_PRZEJAZDU" ColumnName="CZAS_PRZEJAZDU" />
+          <ScalarProperty Name="CENA_BILETU" ColumnName="CENA_BILETU" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AUTOKARY_KIEROWCY">
+      <EntityTypeMapping TypeName="PKSTModel.AUTOKARY_KIEROWCY">
+        <MappingFragment StoreEntitySet="AUTOKARY_KIEROWCY">
+          <ScalarProperty Name="K_ID" ColumnName="K_ID" />
+          <ScalarProperty Name="A_ID" ColumnName="A_ID" />
+          <ScalarProperty Name="MARKA" ColumnName="MARKA" />
+          <ScalarProperty Name="NR_REJ" ColumnName="NR_REJ" />
+          <ScalarProperty Name="MODEL" ColumnName="MODEL" />
+          <ScalarProperty Name="IMIE" ColumnName="IMIE" />
+          <ScalarProperty Name="NAZWISKO" ColumnName="NAZWISKO" />
+          <ScalarProperty Name="PESEL" ColumnName="PESEL" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="HARMONOGRAM" FunctionName="PKSTModel.Store.HARMONOGRAM">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="PKSTModel.HARMONOGRAM_Result">
+          <ScalarProperty Name="A_ID" ColumnName="A_ID" />
+          <ScalarProperty Name="MARKA" ColumnName="MARKA" />
+          <ScalarProperty Name="KU_ID" ColumnName="KU_ID" />
+          <ScalarProperty Name="NAZWA" ColumnName="NAZWA" />
+          <ScalarProperty Name="CZAS_PRZYBYCIA" ColumnName="CZAS_PRZYBYCIA" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="KIEROWCY_W_TRASIE" FunctionName="PKSTModel.Store.KIEROWCY_W_TRASIE">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="PKSTModel.KIEROWCY_W_TRASIE_Result">
+          <ScalarProperty Name="K_ID" ColumnName="K_ID" />
+          <ScalarProperty Name="IMIE" ColumnName="IMIE" />
+          <ScalarProperty Name="NAZWISKO" ColumnName="NAZWISKO" />
+          <ScalarProperty Name="KU_ID" ColumnName="KU_ID" />
+          <ScalarProperty Name="A_ID" ColumnName="A_ID" />
+          <ScalarProperty Name="NR_REJ" ColumnName="NR_REJ" />
+          <ScalarProperty Name="SYGNATURA_KURSU" ColumnName="SYGNATURA_KURSU" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="POJAZDY" FunctionName="PKSTModel.Store.POJAZDY">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="PKSTModel.POJAZDY_Result">
+          <ScalarProperty Name="K_ID" ColumnName="K_ID" />
+          <ScalarProperty Name="IMIE" ColumnName="IMIE" />
+          <ScalarProperty Name="NAZWISKO" ColumnName="NAZWISKO" />
+          <ScalarProperty Name="A_ID" ColumnName="A_ID" />
+          <ScalarProperty Name="NR_REJ" ColumnName="NR_REJ" />
+          <ScalarProperty Name="MARKA" ColumnName="MARKA" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="PRZEBIEG_TRASY" FunctionName="PKSTModel.Store.PRZEBIEG_TRASY">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="PKSTModel.PRZEBIEG_TRASY_Result">
+          <ScalarProperty Name="NAZWA" ColumnName="NAZWA" />
+          <ScalarProperty Name="NUMER_PRZYSTANKU" ColumnName="NUMER_PRZYSTANKU" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="RAPORT_P" FunctionName="PKSTModel.Store.RAPORT_P" />
+    <FunctionImportMapping FunctionImportName="TYGODNIOWY_RAPORT_P" FunctionName="PKSTModel.Store.TYGODNIOWY_RAPORT_P" />
+  </EntityContainerMapping>
+</Mapping>
